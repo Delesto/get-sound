@@ -1,17 +1,14 @@
 const Koa = require('koa');
-const Router = require('koa-router');
 const json = require('koa-json');
 const logger = require('koa-logger');
 const env = require('dotenv');
 
+//Routes
+const router = require('./routes/index');
+
 env.config();
 
 const app = new Koa();
-const router = new Router();
-
-router.get('/', (ctx, next) => {
-    ctx.body = 'Hey';
-});
 
 app.use(json())
     .use(logger())
