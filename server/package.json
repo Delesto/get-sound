@@ -1,12 +1,15 @@
 {
   "dependencies": {
     "bluebird": "^3.5.5",
+    "doasync": "^2.0.1",
     "dotenv": "^8.0.0",
     "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
     "koa-json": "^2.0.2",
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
-    "redis": "^2.8.0"
+    "redis": "^2.8.0",
+    "youtube-mp3-downloader": "^0.6.3"
   },
   "name": "get-sound",
   "version": "1.0.0",

@@ -4,6 +4,6 @@ const router = new Router();
 //Controllers
 const controllers = require('../controllers/index');
 
-router.get('/', controllers.getData);
+router.get('/api/convert', controllers.convert);
 
 module.exports = router; 

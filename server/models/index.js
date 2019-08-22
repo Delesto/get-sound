@@ -16,6 +16,4 @@ redis.on('error', (err) => {
     console.log(err);
 });
 
-redis.set('Data', 'There is something');
-
 module.exports = redis;
