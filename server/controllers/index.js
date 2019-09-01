@@ -4,6 +4,10 @@ const Ffmpeg = require('ffmpeg');
 const ytdl = require('ytdl-core');
 const { promisify } = require('util');
 const redis = require('../models/index');
+const filelogger = require('../utils/filelogger');
+
+const mkdir = promisify(fs.mkdir);
+const exists = promisify(fs.exists);
 
 async function getInfo(ctx) {
     const body = JSON.parse(ctx.request.rawBody);
@@ -36,7 +40,11 @@ module.exports = {
     },
     'convert': async (ctx) => {
         function setPath(name, format) {
-            return path.resolve(__dirname, `../uploads/${name}.${format}`);
+            if(arguments.length > 1 && format) {
+                return path.resolve(__dirname, `../uploads/${name}/${name}.${format}`);
+            } else {
+                return path.resolve(__dirname, `../uploads/${name}`);
+            }
         }
 
         function download(url, path) {
@@ -55,12 +63,23 @@ module.exports = {
         const info = await getInfo(ctx);
         const pattern = /[`~!@#$%^&*()_|+\-=?;:'",.<>\s\{\}\[\]\\\/]/g;
         const name = info.player_response.videoDetails.title.toString().replace(pattern, '');
-
+        
         try {
-            await download(info.video_url, setPath(name, 'avi'));
-            const process = await new Ffmpeg(setPath(name, 'avi'));
-            const extract = promisify(process.fnExtractSoundToMP3.bind(process));
-            const result = await extract(setPath(name, 'mp3'));
+            if(!await exists(setPath(name))) {
+                await mkdir(setPath(name));
+                await download(info.video_url, setPath(name, 'avi'));
+                const process = await new Ffmpeg(setPath(name, 'avi'));
+                const extract = promisify(process.fnExtractSoundToMP3.bind(process));
+                await extract(setPath(name, 'mp3'));
+                filelogger(name, setPath(name));
+            }
+            
+            const result = JSON.stringify({
+                name,
+                pathToMp3: setPath(name, 'mp3'),
+                pathToAvi: setPath(name, 'avi')
+            });
+            
             ctx.body = result;
         } catch (err) {
             ctx.throw(400, err);
