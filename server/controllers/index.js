@@ -57,6 +57,10 @@ module.exports = {
         const name = info.player_response.videoDetails.title.toString().replace(pattern, '');
         
         try {
+            if(!await exists(setPath('../uploads'))) {
+                await mkdir(setPath('../uploads'));
+            }
+
             if(!await exists(setPath(`../uploads/${name}`))) {
                 await mkdir(setPath(`../uploads/${name}`));
                 await download(info.video_url, setPath(`../uploads/${name}/${name}.avi`));
