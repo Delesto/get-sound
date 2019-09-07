@@ -1,11 +1,18 @@
 const Koa = require('koa');
+const env = require('dotenv');
 const json = require('koa-json');
 const logger = require('koa-logger');
 const bodyparser = require('koa-bodyparser');
-const env = require('dotenv');
 
 //Routes
 const router = require('./routes/index');
+
+//Cleaner
+// const cleaner = require('./utils/cleaner');
+// setInterval(async () => {
+//     cleaner();
+// }, 5000)
+
 
 env.config();
 

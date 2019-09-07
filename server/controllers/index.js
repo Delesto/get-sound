@@ -1,9 +1,9 @@
 const fs = require('fs');
-const path = require('path');
 const Ffmpeg = require('ffmpeg');
 const ytdl = require('ytdl-core');
 const { promisify } = require('util');
 const redis = require('../models/index');
+const setPath = require('../utils/setPath');
 const filelogger = require('../utils/filelogger');
 
 const mkdir = promisify(fs.mkdir);
@@ -39,14 +39,6 @@ module.exports = {
         ctx.body = info;
     },
     'convert': async (ctx) => {
-        function setPath(name, format) {
-            if(arguments.length > 1 && format) {
-                return path.resolve(__dirname, `../uploads/${name}/${name}.${format}`);
-            } else {
-                return path.resolve(__dirname, `../uploads/${name}`);
-            }
-        }
-
         function download(url, path) {
             return new Promise((res, rej) => {
                 const stream = ytdl(url)
@@ -65,21 +57,21 @@ module.exports = {
         const name = info.player_response.videoDetails.title.toString().replace(pattern, '');
         
         try {
-            if(!await exists(setPath(name))) {
-                await mkdir(setPath(name));
-                await download(info.video_url, setPath(name, 'avi'));
-                const process = await new Ffmpeg(setPath(name, 'avi'));
+            if(!await exists(setPath(`../uploads/${name}`))) {
+                await mkdir(setPath(`../uploads/${name}`));
+                await download(info.video_url, setPath(`../uploads/${name}/${name}.avi`));
+                const process = await new Ffmpeg(setPath(`../uploads/${name}/${name}.avi`));
                 const extract = promisify(process.fnExtractSoundToMP3.bind(process));
-                await extract(setPath(name, 'mp3'));
-                filelogger(name, setPath(name));
+                await extract(setPath(`../uploads/${name}/${name}.mp3`));
+                filelogger(name, setPath(`../uploads${name}`));
             }
             
             const result = JSON.stringify({
                 name,
-                pathToMp3: setPath(name, 'mp3'),
-                pathToAvi: setPath(name, 'avi')
+                pathToMp3: setPath(`../uploads/${name}/${name}.mp3`),
+                pathToAvi: setPath(`../uploads/${name}/${name}.avi`)
             });
-            
+            await filelogger(name, setPath(`../uploads/${name}`));
             ctx.body = result;
         } catch (err) {
             ctx.throw(400, err);
