@@ -37,7 +37,7 @@ module.exports = async function(name, filePath) {
             if(duplicates.length) {
                 let i = 0;
                 while(i < duplicates.length) {
-                    filelogs.splice(duplicates[i > 0 ? i - 1 : i], 1);
+                    filelogs.splice(i > 0 ? duplicates[i] - i : duplicates[i], 1);
                     i++;
                 }
             }

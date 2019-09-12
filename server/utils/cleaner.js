@@ -5,12 +5,9 @@ const unlink = promisify(fs.unlink);
 
 async function cleaner() {
     try {
-        for(let item of filelogs) {
-            if(item.rTime > Date.now()) {
-                await unlink(item.path);
-                return true;
-            }
-        }
+        filelogs.forEach(file => {
+            
+        });
     } catch(err) {
         return err;
     }
