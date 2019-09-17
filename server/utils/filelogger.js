@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { promisify } = require('util');
+const setTime = require('../utils/setTime');
 const filelogs = require('../filelogs');
 
 const write = promisify(fs.writeFile);
@@ -16,18 +17,10 @@ function getDuplicateIndices(array, searchFile) {
 }
 
 module.exports = async function(name, filePath) {
-    function setHours(h) {
-        return new Date().setTime(new Date().getTime() + (h * 60 * 60 * 1000));
-    }
-
-    function setSeconds(s) {
-        return new Date().setTime(new Date().getTime() + (s * 1000))
-    }
-
     const newFile = {
         name,
         path: filePath,
-        rTime: setSeconds(10)
+        rTime: setTime.seconds(10)
     }
 
     try {

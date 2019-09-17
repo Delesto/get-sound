@@ -67,7 +67,6 @@ module.exports = {
                 const process = await new Ffmpeg(setPath(`../uploads/${name}/${name}.avi`));
                 const extract = promisify(process.fnExtractSoundToMP3.bind(process));
                 await extract(setPath(`../uploads/${name}/${name}.mp3`));
-                filelogger(name, setPath(`../uploads${name}`));
             }
             
             const result = JSON.stringify({
