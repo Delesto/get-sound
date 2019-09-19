@@ -20,7 +20,7 @@ module.exports = async function(name, filePath) {
     const newFile = {
         name,
         path: filePath,
-        rTime: setTime.seconds(10)
+        rTime: setTime.seconds(5)
     }
 
     try {
@@ -42,7 +42,7 @@ module.exports = async function(name, filePath) {
             await write('filelogs.json', JSON.stringify(data));
         }
     } catch(err) {
-        console.log(err)
+        throw err;
     }
     
 }

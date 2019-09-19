@@ -8,11 +8,7 @@ const bodyparser = require('koa-bodyparser');
 const router = require('./routes/index');
 
 //Cleaner
-// const cleaner = require('./utils/cleaner');
-// setInterval(async () => {
-//     cleaner();
-// }, 5000)
-
+const cleaner = require('./utils/cleaner');
 
 env.config();
 
@@ -20,6 +16,7 @@ const app = new Koa();
 
 app.use(json())
     .use(bodyparser())
+    .use(cleaner())
     .use(logger())
     .use(router.routes())
     .use(router.allowedMethods())

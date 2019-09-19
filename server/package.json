@@ -9,6 +9,7 @@
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
     "redis": "^2.8.0",
+    "rimraf": "^3.0.0",
     "ytdl-core": "^0.29.5"
   },
   "name": "get-sound",
