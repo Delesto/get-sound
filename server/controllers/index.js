@@ -2,7 +2,6 @@ const fs = require('fs');
 const Ffmpeg = require('ffmpeg');
 const ytdl = require('ytdl-core');
 const { promisify } = require('util');
-const redis = require('../models/index');
 const setPath = require('../utils/setPath');
 const filelogger = require('../utils/filelogger');
 
