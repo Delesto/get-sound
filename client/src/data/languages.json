@@ -1,0 +1,32 @@
+{
+    "russian": {
+        "navLinks": ["Главная", "Вопросы", "Русский"],
+        "dropdownLinks": ["English", "中国人"],
+        "submitButton": "Загрузить",
+        "cards": [
+            { "title": "Копируй ссылку на видео", "description": "Просто вставь ссылку любого видео длительностью не более 2х часов" },
+            { "title": "Выбирай любой Формат", "description": "Сервис предоставляет возможность загружать аудио файлы в форматах: “MP3”, “WMA”, “AC3”." },
+            { "title": "Загружай все бесплатно", "description": "Получи возможность бесплатно загрузить понравившуюся музыку из любого видео на YouTube." }
+        ]
+    },
+    "english": {
+        "navLinks": ["Home", "FAQ", "English"],
+        "dropdownLinks": ["Русский", "中国人"],
+        "submitButton": "Download",
+        "cards": [
+            { "title": "Copy the link to the video", "description": "Just insert a link to any video lasting no more than 2 hours" },
+            { "title": "Choose any format", "description": "The service provides the ability to download audio files in the formats: “MP3”, “WMA”, “AC3”." },
+            { "title": "Download everything for free", "description": "Get the opportunity to download your favorite music from any video on YouTube for free." }
+        ]
+    },
+    "chinese": {
+        "navLinks": ["首页", "问题", "中国人"],
+        "dropdownLinks": ["Русский", "English"],
+        "submitButton": "资料下载",
+        "cards": [
+            { "title": "将链接复制到视频", "description": "只需插入指向不超过2小时的任何视频的链接" },
+            { "title": "选择任何格式", "description": "该服务可以下载以下格式的音频文件：“ MP3”，“ WMA”，“ AC3”" },
+            { "title": "免费下载所有内容", "description": "有机会免费从YouTube上的任何视频中下载您喜欢的音乐" }
+        ]
+    }
+}
