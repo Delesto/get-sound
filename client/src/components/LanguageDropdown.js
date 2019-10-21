@@ -1,9 +1,9 @@
 import React from 'react';
 export default function LanguageDropdown({ dropdownLabel, dropdownLinks }) {
     return (
-        <ul>
+        <ul className="nav__dropdown">
             <li>{dropdownLabel}
-                <ul>
+                <ul className="dropdown-area">
                     {dropdownLinks.map((link) => <li key={link}>{link}</li>)}
                 </ul>
             </li>
